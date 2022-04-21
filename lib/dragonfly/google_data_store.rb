@@ -49,6 +49,19 @@ module Dragonfly
       nil
     end
 
+    def url_for(uid, opts = {})
+      default_expiration_time_in_seconds = 5 * 60
+      expires = opts[:expires].presence || default_expiration_time_in_seconds
+
+      storage.signed_url(
+        bucket_name, 
+        uid, 
+        method: "GET", 
+        expires: expires,
+        version: :v4
+      )
+    end
+
     def self.generate_uid
       "#{Time.now.strftime('%Y/%m/%d/%H/%M')}/#{SecureRandom.uuid}"
     end
