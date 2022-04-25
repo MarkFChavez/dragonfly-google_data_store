@@ -55,7 +55,7 @@ module Dragonfly
 
       storage.signed_url(
         bucket_name, 
-        uid, 
+        full_path(uid), 
         method: "GET", 
         expires: expires,
         version: :v4
